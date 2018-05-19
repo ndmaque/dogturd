@@ -1,0 +1,33 @@
+ [
+    {
+      "id": "age",
+      "label": "Age",
+      "help": "How old is it",
+      "type": "radio",
+      "default": "",
+      "options": [
+        {"value": "a", "label":"Steaming"},
+        {"value": "b", "label":"Recent"},
+        {"value": "c", "label":"Crusty"}
+      ]
+    } ,
+    {
+      "id": "size",
+      "label":"Size",
+      "help": "How old is it",
+      "type": "radio",
+      "default": "",
+      "options": [
+        {"value": "a", "label":"Shitzu"},
+        {"value": "b", "label":"Labradorial"},
+        {"value": "c", "label":"Lion"}
+      ]
+    },
+    {
+      "id": "rating",
+      "label":"Rating",
+      "help": "Rate it's overall quality",
+      "type": "5star",
+      "default": ""
+    }
+]

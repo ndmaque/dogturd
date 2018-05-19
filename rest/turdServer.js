@@ -6,9 +6,22 @@ app.use(cors());
 
 // a simple ad to array text file for now
 // TODO
-const LOG_FILE = 'files/log.json';
-const TURD_FILE='files/turds.json';
-const QUESTIONS_FILE='files/questions.json';
+const TURD_LOG = 'turdLog.json';
+const TURD_DATA='turdData.json';
+const TURD_EDIT_OPTIONS='appEditTurdOptions.json';
+
+// The form options is a MUST
+if (!fs.existsSync(TURD_EDIT_OPTIONS)) {
+  // this is very bad, lets logit
+  //this.logit('open TURD_EDIT_OPTIONS failed', TURD_EDIT_OPTIONS);
+  console.log('ERROR' + TURD_EDIT_OPTIONS + ' did not exist Severity=10' );
+
+};
+
+
+// TODO add this functionlaity to grunt install or somewhere
+if (!fs.existsSync(TURD_LOG)) {fs.writeFileSync(TURD_LOG, '[]')};
+if (!fs.existsSync(TURD_DATA)) {fs.writeFileSync(TURD_DATA, '[]')};
 
 // body parse thing
 const bodyParser = require('body-parser');
@@ -24,11 +37,11 @@ app.use(function(req, res, next) {
 });
 
 app.get('/questions', function (req, res) {
-   const data = getObjFromJsonFile(QUESTIONS_FILE);
+   const data = getObjFromJsonFile(TURD_EDIT_OPTIONS);
    res.end(JSON.stringify(data));
 });
 app.get('/turds', function (req, res) {
-   const turds = getObjFromJsonFile(TURD_FILE);
+   const turds = getObjFromJsonFile(TURD_DATA);
    const date = new Date();
    console.log('date', date.toString());
    console.log('getturds', turds.length);
@@ -38,7 +51,7 @@ app.get('/turds', function (req, res) {
 
 app.post('/turd/save', function (req, res) {
   const turd = req.body ? req.body : [];
-  const result = appendToJson(TURD_FILE, turd);
+  const result = appendToJson(TURD_DATA, turd);
   console.log('/turd/save result', result);
   res.end(JSON.stringify(result));
 });
@@ -53,6 +66,10 @@ function appendToJson(fileName, objArr) {
 
 function getObjFromJsonFile(fileName) {
   return JSON.parse(fs.readFileSync(fileName, 'utf8'));
+}
+
+logit = (msg, severity) => {
+  console.log('logit called', msg , severity);
 }
 
 const server = app.listen(8095, function () {
