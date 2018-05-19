@@ -1,5 +1,7 @@
 node_modules
 .expo
 .sonarlint
+npm-debug.log
+package-lock.json
 rest/files/*
 !rest/files/README.md
