@@ -14,7 +14,7 @@ const TURD_EDIT_OPTIONS='appEditTurdOptions.json';
 if (!fs.existsSync(TURD_EDIT_OPTIONS)) {
   // this is very bad, lets logit
   //this.logit('open TURD_EDIT_OPTIONS failed', TURD_EDIT_OPTIONS);
-  console.log('ERROR' + TURD_EDIT_OPTIONS + ' did not exist Severity=10' );
+//  console.log('ERROR' + TURD_EDIT_OPTIONS + ' did not exist Severity=10' );
 
 };
 
@@ -68,9 +68,6 @@ function getObjFromJsonFile(fileName) {
   return JSON.parse(fs.readFileSync(fileName, 'utf8'));
 }
 
-logit = (msg, severity) => {
-  console.log('logit called', msg , severity);
-}
 
 const server = app.listen(8095, function () {
   const host = server.address();
